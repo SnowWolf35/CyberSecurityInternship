@@ -104,3 +104,7 @@ Web Application Penetration Testing Methodology
 
 $ dirb http://192.168.31.138
 directory bruteforceThe above dirb command does directory bruteforce attack to find all the hidden hyperlinks.
+
+
+Blog Link
+https://medium.com/@darshandarsh35/cyber-security-internship-2bb4055ae311
